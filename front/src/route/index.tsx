@@ -3,9 +3,9 @@ import { history } from "./history";
 import { authRoute } from "route/authRoute";
 import React from "react";
 import { TopPage } from "ui/page/top";
-import { productsRoute } from "./productsRoute";
-import { productRoute } from "./productRoute";
 import { profileRoute } from "./profileRoute";
+import { cartRoute } from "./cartRoute";
+import { categoryRoute } from "./categoryRoute";
 
 const indexRoute: Route[] = [
     {
@@ -20,9 +20,9 @@ const indexRoute: Route[] = [
 
 export const routes: Route[] = [
     authRoute,
-    productsRoute,
-    productRoute,
     profileRoute,
+    cartRoute,
+    categoryRoute,
 ].reduce((prevRoute, currRoute) => prevRoute.concat(currRoute), indexRoute);
 
 export const location = new ReactLocation({ history: history });
