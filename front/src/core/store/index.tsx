@@ -1,8 +1,10 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
+import { UIModalSlice } from "./ui/product-modal/slice";
 import { UIProfileSlice } from "./ui/profile/slice";
 
 const appReducer = combineReducers({
     [UIProfileSlice.name]: UIProfileSlice.reducer,
+    [UIModalSlice.name]: UIModalSlice.reducer,
 });
 
 const store = configureStore({
