@@ -1,4 +1,5 @@
 import { PayloadAction } from "@reduxjs/toolkit";
+import { UIModal, UIProductData } from "./type";
 
 export const initialState = {
     productData: {
@@ -11,11 +12,14 @@ export const initialState = {
 };
 
 export const reducers = {
-    handleOpenModal: (_state: any, action: PayloadAction<boolean>) => ({
+    handleOpenModal: (_state: UIModal, action: PayloadAction<boolean>) => ({
         ..._state,
         isOpen: action.payload,
     }),
-    updateProductData: (_state: any, action: PayloadAction<any>) => ({
+    updateProductData: (
+        _state: UIModal,
+        action: PayloadAction<UIProductData>
+    ) => ({
         ..._state,
         productData: action.payload,
     }),

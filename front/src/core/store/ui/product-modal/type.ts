@@ -1,16 +1,11 @@
-export type UIProfile = {
-    userInfo: UIProfileUser;
-    memberInfo: UIProfileMember;
+export type UIModal = {
+    productData: UIProductData;
+    isOpen: boolean;
 };
 
-type UIProfileUser = {
-    name: string;
-    age: string;
-    tel: string;
-};
-
-type UIProfileMember = {
-    name: string;
-    age: string;
-    tel: string;
+export type UIProductData = {
+    title: string;
+    description: string;
+    price: number;
+    image: string;
 };
