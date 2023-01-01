@@ -1,5 +1,6 @@
 import { dispatch } from "core/store";
 import { UIModalAction } from "core/store/ui/product-modal/actions";
+import { UICartAction } from "core/store/ui/cart/actions";
 import { UIModalSelector } from "core/store/ui/product-modal/selector";
 import React, { useState } from "react";
 import { history } from "../../../../../route/history";
@@ -30,7 +31,22 @@ export const ProductModal = () => {
 
     // どの商品をいくつカートへ追加するか
     const addToCart = () => {
+        // モーダルを閉じる
         dispatch(UIModalAction.handleOpenModal(false));
+        // カートへ指定商品を追加({商品データとqty})
+        dispatch(
+            UICartAction.addProductToCart({
+                id: modalState.productData.id,
+                title: modalState.productData.title,
+                description: modalState.productData.description,
+                price: modalState.productData.price,
+                image: modalState.productData.image,
+                quantity: qty,
+                totalPrice: modalState.productData.price * qty,
+            })
+        );
+        // 合計商品数を追加
+        dispatch(UICartAction.getTotalResult());
         history.push("/cart");
     };
     return (

@@ -1,8 +1,11 @@
 import { Link } from "@tanstack/react-location";
+import { UICartSelector } from "core/store/ui/cart/selector";
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import "./index.scss";
 
 export const Header = () => {
+    const cartState = useSelector(UICartSelector);
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
     return (
@@ -33,7 +36,9 @@ export const Header = () => {
                                     <i className="fas fa-shopping-cart"></i>
                                 </span>
                                 <div className="btn-txt fw-5">
-                                    <span className="cart-count-value">3</span>
+                                    <span className="cart-count-value">
+                                        {cartState.totalQty}
+                                    </span>
                                 </div>
                             </Link>
                         </div>
