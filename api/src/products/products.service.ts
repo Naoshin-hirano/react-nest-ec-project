@@ -24,4 +24,9 @@ export class ProductsService {
     await this.productsRepository.save(newItem);
     return newItem;
   }
+
+  async delete(id: string): Promise<string> {
+    await this.productsRepository.delete({ id });
+    return '削除完了しました';
+  }
 }

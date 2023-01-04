@@ -1,4 +1,12 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  ParseUUIDPipe,
+  Post,
+} from '@nestjs/common';
 import { Products } from 'src/typeorm/products.entity';
 import { CreateProductsDto } from './dto/create.products.dto';
 import { ProductsService } from './products.service';
@@ -17,5 +25,10 @@ export class ProductsController {
     @Body() createProductsDto: CreateProductsDto,
   ): Promise<Products> {
     return await this.productsService.create(createProductsDto);
+  }
+
+  @Delete(':id')
+  async delete(@Param('id', ParseUUIDPipe) id: string): Promise<string> {
+    return await this.productsService.delete(id);
   }
 }
