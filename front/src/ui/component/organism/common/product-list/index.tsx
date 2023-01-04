@@ -1,7 +1,8 @@
 import React from "react";
+import { numberToPrice } from "utils/helper";
 import "./index.scss";
 
-export const ProductList = () => {
+export const ProductList = ({ productList }: any) => {
     // if (status === STATUS.ERROR) return <Error />;
     // if (status === STATUS.LOADING) return <Loader />;
 
@@ -17,103 +18,31 @@ export const ProductList = () => {
                         </h3>
                     </div>
                     <div className="product-items grid">
-                        {/* {products.slice(0, 20).map((product) => ( */}
-                        <div className="product-item bg-white">
-                            <div className="product-item-img">
-                                <img
-                                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9z8JFWF3oihXJmFNGppPGiN5Tg1SC9d3dOg&usqp=CAU"
-                                    alt=""
-                                />
-                                <div className="product-item-cat text-white fs-13 text-uppercase bg-gold fw-6">
-                                    ドライバー
+                        {productList &&
+                            productList.slice(0, 20).map((product: any) => (
+                                <div
+                                    className="product-item bg-white"
+                                    key={product.id}
+                                >
+                                    <div className="product-item-img">
+                                        <img
+                                            src={product.image}
+                                            alt="商品イメージ"
+                                        />
+                                        <div className="product-item-cat text-white fs-13 text-uppercase bg-gold fw-6">
+                                            ドライバー
+                                        </div>
+                                    </div>
+                                    <div className="product-item-body">
+                                        <h6 className="product-item-title text-pine-green fw-4 fs-15">
+                                            {product.title}
+                                        </h6>
+                                        <div className="product-item-price text-regal-blue fw-7 fs-18">
+                                            {numberToPrice(product.price)}
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div className="product-item-body">
-                                <h6 className="product-item-title text-pine-green fw-4 fs-15">
-                                    テーラーメイドM4
-                                </h6>
-                                <div className="product-item-price text-regal-blue fw-7 fs-18">
-                                    ¥5,670
-                                </div>
-                            </div>
-                        </div>
-                        <div className="product-item bg-white">
-                            <div className="product-item-img">
-                                <img
-                                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9z8JFWF3oihXJmFNGppPGiN5Tg1SC9d3dOg&usqp=CAU"
-                                    alt=""
-                                />
-                                <div className="product-item-cat text-white fs-13 text-uppercase bg-gold fw-6">
-                                    ドライバー
-                                </div>
-                            </div>
-                            <div className="product-item-body">
-                                <h6 className="product-item-title text-pine-green fw-4 fs-15">
-                                    テーラーメイドM4
-                                </h6>
-                                <div className="product-item-price text-regal-blue fw-7 fs-18">
-                                    ¥5,670
-                                </div>
-                            </div>
-                        </div>
-                        <div className="product-item bg-white">
-                            <div className="product-item-img">
-                                <img
-                                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9z8JFWF3oihXJmFNGppPGiN5Tg1SC9d3dOg&usqp=CAU"
-                                    alt=""
-                                />
-                                <div className="product-item-cat text-white fs-13 text-uppercase bg-gold fw-6">
-                                    ドライバー
-                                </div>
-                            </div>
-                            <div className="product-item-body">
-                                <h6 className="product-item-title text-pine-green fw-4 fs-15">
-                                    テーラーメイドM4
-                                </h6>
-                                <div className="product-item-price text-regal-blue fw-7 fs-18">
-                                    ¥5,670
-                                </div>
-                            </div>
-                        </div>
-                        <div className="product-item bg-white">
-                            <div className="product-item-img">
-                                <img
-                                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9z8JFWF3oihXJmFNGppPGiN5Tg1SC9d3dOg&usqp=CAU"
-                                    alt=""
-                                />
-                                <div className="product-item-cat text-white fs-13 text-uppercase bg-gold fw-6">
-                                    ドライバー
-                                </div>
-                            </div>
-                            <div className="product-item-body">
-                                <h6 className="product-item-title text-pine-green fw-4 fs-15">
-                                    テーラーメイドM4
-                                </h6>
-                                <div className="product-item-price text-regal-blue fw-7 fs-18">
-                                    ¥5,670
-                                </div>
-                            </div>
-                        </div>
-                        <div className="product-item bg-white">
-                            <div className="product-item-img">
-                                <img
-                                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9z8JFWF3oihXJmFNGppPGiN5Tg1SC9d3dOg&usqp=CAU"
-                                    alt=""
-                                />
-                                <div className="product-item-cat text-white fs-13 text-uppercase bg-gold fw-6">
-                                    ドライバー
-                                </div>
-                            </div>
-                            <div className="product-item-body">
-                                <h6 className="product-item-title text-pine-green fw-4 fs-15">
-                                    テーラーメイドM4
-                                </h6>
-                                <div className="product-item-price text-regal-blue fw-7 fs-18">
-                                    ¥5,670
-                                </div>
-                            </div>
-                        </div>
-                        {/* ))} */}
+                            ))}
                     </div>
                 </div>
             </div>

@@ -1,10 +1,10 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { UICartSlice } from "./ui/cart/slice";
 import { UIModalSlice } from "./ui/product-modal/slice";
-import { UIProfileSlice } from "./ui/profile/slice";
+import { UIProductSlice } from "./ui/products/slice";
 
 const appReducer = combineReducers({
-    [UIProfileSlice.name]: UIProfileSlice.reducer,
+    [UIProductSlice.name]: UIProductSlice.reducer,
     [UIModalSlice.name]: UIModalSlice.reducer,
     [UICartSlice.name]: UICartSlice.reducer,
 });

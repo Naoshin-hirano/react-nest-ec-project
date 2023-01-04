@@ -4,12 +4,13 @@ import { SingleCategory } from "./SingleCategory";
 import { TopCategory } from "./TopCategory";
 import "./index.scss";
 
-export const Top: React.FC<any> = () => {
+export const Top: React.FC<any> = (props) => {
+    const { productList } = props;
     return (
         <div className="home-page">
             {/* <Slider /> */}
             <TopCategory />
-            <ProductList />
+            <ProductList productList={productList} />
             <section>
                 {/* {productsByCategoryMock[0] && (
                      <SingleCategory

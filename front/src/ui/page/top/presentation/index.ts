@@ -1,29 +1,16 @@
+import { UIProductSelector } from "core/store/ui/products/selector";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
+import * as Usecase from "../../../../core/usecase/products";
+
 export const useCreateProps = () => {
+    const productState = useSelector(UIProductSelector);
+
+    useEffect(() => {
+        Usecase.getProductList();
+    }, []);
+
     return {
-        topTitle,
-        topMenu,
+        productList: productState?.productList,
     };
-};
-
-type TopTitle = {
-    title: string;
-};
-type TopMenu = {
-    buttonLabels: {
-        menu1: string;
-        menu2: string;
-        menu3: string;
-    };
-};
-
-const topTitle: TopTitle = {
-    title: "トップタイトル",
-};
-
-const topMenu: TopMenu = {
-    buttonLabels: {
-        menu1: "トップメニュー1",
-        menu2: "トップメニュー2",
-        menu3: "トップメニュー3",
-    },
 };
