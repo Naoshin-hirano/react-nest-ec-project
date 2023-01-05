@@ -1,5 +1,6 @@
 import { Exclude } from 'class-transformer';
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Products } from './products.entity';
 
 @Entity()
 export class Users {
@@ -18,4 +19,7 @@ export class Users {
 
   @Column()
   updatedAt: string;
+
+  @ManyToOne(() => Products, (product) => product.users)
+  product: Products;
 }
