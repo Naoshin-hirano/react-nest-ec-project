@@ -20,6 +20,6 @@ export class Users {
   @Column()
   updatedAt: string;
 
-  @ManyToOne(() => Products, (product) => product.users)
-  product: Products;
+  //   @ManyToOne(() => Products, (product) => product.categories)
+  //   product: Products;
 }

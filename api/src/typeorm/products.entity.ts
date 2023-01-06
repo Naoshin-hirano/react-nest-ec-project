@@ -1,11 +1,10 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { Category } from './category.entity';
-import { Users } from './users.entity';
 
 @Entity()
 export class Products {
-  @PrimaryGeneratedColumn('uuid')
-  id: string;
+  @PrimaryGeneratedColumn()
+  id: number;
 
   @Column({
     nullable: false,
@@ -30,15 +29,15 @@ export class Products {
   @Column()
   updatedAt: Date;
 
-  @Column()
-  userId: string;
+  //   @Column()
+  //   userId: string;
 
   @Column()
-  categoryId: string;
+  categoryId: number;
 
-  @OneToMany(() => Category, (category) => category.product)
-  categories: Category[];
+  @ManyToOne(() => Category, (category) => category.products)
+  category: Category;
 
-  @OneToMany(() => Users, (user) => user.product)
-  users: Users[];
+  //   @OneToMany(() => Users, (user) => user.product)
+  //   users: Users[];
 }
