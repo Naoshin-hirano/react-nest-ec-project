@@ -3,11 +3,10 @@ export type UIProductState = {
 };
 
 export type UIProduct = {
-    id: string;
+    id: number;
     title: string;
     description: string;
     price: number;
     image: string;
-    createdAt: string;
-    updatedAt: string;
+    categoryName: string;
 };

@@ -1,8 +1,19 @@
 import { Link } from "@tanstack/react-location";
+import { UIProduct } from "core/store/ui/products/type";
 import React from "react";
+import { CategoryPageProps } from "ui/component/template/category";
 import { ProductList } from "../common/product-list";
 
-export const Category: React.FC<any> = () => {
+export const Category: React.FC<CategoryPageProps> = ({
+    paramsId,
+    categoryList,
+    productList,
+}: CategoryPageProps) => {
+    // parametersのカテゴリ
+    const category = categoryList[Number(paramsId) - 1];
+    const categorizedItems = productList.filter(
+        (item: UIProduct) => item.categoryName === category.name
+    );
     return (
         <div className="category-page">
             <div className="container">
@@ -22,11 +33,11 @@ export const Category: React.FC<any> = () => {
                                 <i className="fas fa-chevron-right"></i>
                             </span>
                         </li>
-                        <li>ドライバー</li>
+                        <li>{category && category.name}</li>
                     </ul>
                 </div>
             </div>
-            <ProductList />
+            <ProductList productList={categorizedItems} />
         </div>
     );
 };

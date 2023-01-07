@@ -1,11 +1,14 @@
 import { Link } from "@tanstack/react-location";
 import { UICartSelector } from "core/store/ui/cart/selector";
+import { UICategorySelector } from "core/store/ui/category/selector";
+import { UICategory } from "core/store/ui/category/type";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import "./index.scss";
 
 export const Header = () => {
     const cartState = useSelector(UICartSelector);
+    const categoryState = useSelector(UICategorySelector);
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
     return (
@@ -59,62 +62,21 @@ export const Header = () => {
                             >
                                 <i className="fas fa-times"></i>
                             </button>
-                            {/* {categories.map((category) => ( */}
-                            <li>
-                                <Link
-                                    to={`/category/1`}
-                                    className="nav-link text-white"
-                                    onClick={() => setIsSidebarOpen(false)}
-                                >
-                                    ドライバー
-                                </Link>
-                            </li>
-                            <li>
-                                <Link
-                                    to={`/category/2`}
-                                    className="nav-link text-white"
-                                    onClick={() => setIsSidebarOpen(false)}
-                                >
-                                    アイアン
-                                </Link>
-                            </li>
-                            <li>
-                                <Link
-                                    to={`/category/3`}
-                                    className="nav-link text-white"
-                                    onClick={() => setIsSidebarOpen(false)}
-                                >
-                                    パター
-                                </Link>
-                            </li>
-                            <li>
-                                <Link
-                                    to={`/category/4`}
-                                    className="nav-link text-white"
-                                    onClick={() => setIsSidebarOpen(false)}
-                                >
-                                    ユーティリティ
-                                </Link>
-                            </li>
-                            <li>
-                                <Link
-                                    to={`/category/5`}
-                                    className="nav-link text-white"
-                                    onClick={() => setIsSidebarOpen(false)}
-                                >
-                                    ポール
-                                </Link>
-                            </li>
-                            <li>
-                                <Link
-                                    to={`/category/3`}
-                                    className="nav-link text-white"
-                                    onClick={() => setIsSidebarOpen(false)}
-                                >
-                                    その他
-                                </Link>
-                            </li>
-                            {/* ))} */}
+                            {categoryState.categoryList.map(
+                                (category: UICategory) => (
+                                    <li key={category.id}>
+                                        <Link
+                                            to={`/category/${category.id}`}
+                                            className="nav-link text-white"
+                                            onClick={() =>
+                                                setIsSidebarOpen(false)
+                                            }
+                                        >
+                                            {category.name}
+                                        </Link>
+                                    </li>
+                                )
+                            )}
                         </ul>
 
                         <button

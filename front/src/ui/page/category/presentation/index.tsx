@@ -1,39 +1,18 @@
+import { useMatch } from "@tanstack/react-location";
+import { UICategorySelector } from "core/store/ui/category/selector";
+import { UIProductSelector } from "core/store/ui/products/selector";
+import { useSelector } from "react-redux";
+
 export const useCreateProps = () => {
+    const categoryState = useSelector(UICategorySelector);
+    const productState = useSelector(UIProductSelector);
+    const {
+        params: { id },
+    } = useMatch();
+
     return {
-        firstTitle,
-        firstMenu,
-        backButton,
+        productList: productState?.productList,
+        categoryList: categoryState?.categoryList,
+        paramsId: id,
     };
-};
-
-type FirstTitle = {
-    title: string;
-};
-type FirstMenu = {
-    buttonLabels: {
-        menu1: string;
-        menu2: string;
-        menu3: string;
-    };
-};
-type BackButton = {
-    buttonLabels: {
-        back: string;
-    };
-};
-
-const firstTitle: FirstTitle = {
-    title: "Firstタイトル",
-};
-const firstMenu: FirstMenu = {
-    buttonLabels: {
-        menu1: "Firstメニュー1",
-        menu2: "Firstメニュー2",
-        menu3: "Firstメニュー3",
-    },
-};
-const backButton: BackButton = {
-    buttonLabels: {
-        back: "閉じる",
-    },
 };

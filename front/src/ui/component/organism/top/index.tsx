@@ -3,32 +3,21 @@ import { ProductList } from "../common/product-list";
 import { SingleCategory } from "./SingleCategory";
 import { TopCategory } from "./TopCategory";
 import "./index.scss";
+import { TopPageProps } from "ui/component/template/top";
 
-export const Top: React.FC<any> = (props) => {
-    const { productList } = props;
+export const Top: React.FC<TopPageProps> = (props) => {
+    const { productList, categoryList } = props;
     return (
         <div className="home-page">
             {/* <Slider /> */}
-            <TopCategory />
+            <TopCategory categoryList={categoryList} />
             <ProductList productList={productList} />
             <section>
-                {/* {productsByCategoryMock[0] && (
-                     <SingleCategory
-                         products={productsByCategoryMock[0]}
-                         // products={productsByCategory[0]}
-                         status={catProductAllStatus}
-                     />
-                 )} */}
-                <SingleCategory />
-            </section>
-            <section>
-                {/* {productsByCategoryMock[1] && (
-                     <SingleCategory
-                         products={productsByCategoryMock[1]}
-                         status={catProductAllStatus}
-                     />
-                 )} */}
-                <SingleCategory />
+                {categoryList?.map((category) => {
+                    return (
+                        <SingleCategory key={category.id} category={category} />
+                    );
+                })}
             </section>
         </div>
     );
