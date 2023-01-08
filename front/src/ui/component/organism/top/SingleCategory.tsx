@@ -41,6 +41,7 @@ export const SingleCategory = ({ category }: SingleCategoryProps) => {
                                         );
                                         dispatch(
                                             UIModalAction.updateProductData({
+                                                id: product.id,
                                                 title: product.title,
                                                 description:
                                                     product.description,

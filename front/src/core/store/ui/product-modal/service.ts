@@ -3,6 +3,7 @@ import { UIModal, UIProductData } from "./type";
 
 export const initialState = {
     productData: {
+        id: 0,
         title: "",
         description: "",
         price: 0,

@@ -4,6 +4,7 @@ export type UIModal = {
 };
 
 export type UIProductData = {
+    id: number;
     title: string;
     description: string;
     price: number;

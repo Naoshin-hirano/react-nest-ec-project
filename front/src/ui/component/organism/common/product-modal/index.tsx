@@ -6,6 +6,7 @@ import React, { useState } from "react";
 import { history } from "../../../../../route/history";
 import { useSelector } from "react-redux";
 import "./index.scss";
+import { numberToPrice } from "utils/helper";
 
 export const ProductModal = () => {
     // このモーダルのグローバル状態管理
@@ -81,7 +82,8 @@ export const ProductModal = () => {
                                 {modalState.productData.description}
                             </p>
                             <div className="price fw-7 fs-24">
-                                金額: ¥{modalState.productData.price}
+                                金額:
+                                {numberToPrice(modalState.productData.price)}
                             </div>
                             <div className="qty flex">
                                 <span className="text-light-blue qty-text">

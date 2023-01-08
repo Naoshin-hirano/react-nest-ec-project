@@ -49,16 +49,18 @@ export const reducers = {
         // 削除する商品の数量と小計をリセット
         _state.cartProducts.forEach((item) => {
             if (item.id === action.payload.id) {
+                // カート合計数量 - 削除商品の数量
                 _state.totalQty -= item.quantity;
+                // カート小計 - 削除商品の小計
                 _state.subTotal -= item.totalPrice;
+                // カート合計金額 - 削除商品の小計
+                _state.totalAmount -= item.totalPrice;
             }
         });
         // カート内商品リストを削除
         _state.cartProducts = _state.cartProducts.filter(
             (item) => item.id !== action.payload.id
         );
-        // カート合計金額をリセット
-        _state.totalAmount = 0;
     },
     // カート内商品をすべて削除
     removeAllProductFromCart: (_state: UICart) => ({
@@ -68,7 +70,7 @@ export const reducers = {
         subTotal: 0,
         totalAmount: 0,
     }),
-    // 指定商品の数量の増減
+    // 指定商品の数量のincrement
     changeCartQty(
         _state: UICart,
         action: PayloadAction<{ id: number; type: string }>

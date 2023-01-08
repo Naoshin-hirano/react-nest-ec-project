@@ -1,6 +1,11 @@
+import { dispatch } from "core/store";
+import { UIModalAction } from "core/store/ui/product-modal/actions";
+import { UIModalSelector } from "core/store/ui/product-modal/selector";
 import { UIProduct } from "core/store/ui/products/type";
 import React from "react";
+import { useSelector } from "react-redux";
 import { numberToPrice } from "utils/helper";
+import { ProductModal } from "../product-modal";
 import "./index.scss";
 
 type ProductListProps = {
@@ -11,9 +16,11 @@ export const ProductList = ({ productList }: ProductListProps) => {
     // if (status === STATUS.ERROR) return <Error />;
     // if (status === STATUS.LOADING) return <Loader />;
 
+    // 商品詳細モーダルの状態管理
+    const modalState = useSelector(UIModalSelector);
     return (
         <section className="product py-5 bg-ghost-white" id="products">
-            {/* {isModalVisible && <SingleProduct />} */}
+            {modalState.isOpen && <ProductModal />}
 
             <div className="container">
                 <div className="product-content">
@@ -30,6 +37,25 @@ export const ProductList = ({ productList }: ProductListProps) => {
                                     <div
                                         className="product-item bg-white"
                                         key={product.id}
+                                        onClick={() => {
+                                            dispatch(
+                                                UIModalAction.handleOpenModal(
+                                                    true
+                                                )
+                                            );
+                                            dispatch(
+                                                UIModalAction.updateProductData(
+                                                    {
+                                                        id: product.id,
+                                                        title: product.title,
+                                                        description:
+                                                            product.description,
+                                                        price: product.price,
+                                                        image: product.image,
+                                                    }
+                                                )
+                                            );
+                                        }}
                                     >
                                         <div className="product-item-img">
                                             <img

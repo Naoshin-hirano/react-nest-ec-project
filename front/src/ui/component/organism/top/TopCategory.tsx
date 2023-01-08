@@ -22,7 +22,10 @@ export const TopCategory = ({ categoryList }: TopCategoryProps) => {
                     </div>
                     <div className="category-items grid">
                         {categoryList.map((category: UICategory) => (
-                            <Link key={category.id} to={`category/1`}>
+                            <Link
+                                key={category.id}
+                                to={`category/${category.id}`}
+                            >
                                 <div className="category-item">
                                     <div className="category-item-img">
                                         <img
