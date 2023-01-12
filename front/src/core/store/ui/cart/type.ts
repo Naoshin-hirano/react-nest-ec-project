@@ -1,7 +1,6 @@
 export type UICart = {
     cartProducts: UICartProduct[];
     totalQty: number;
-    subTotal: number;
     totalAmount: number;
     deliveryCharge: number;
 };

@@ -4,7 +4,6 @@ import { UICart, UICartProduct } from "./type";
 export const initialState = {
     cartProducts: [] as UICartProduct[],
     totalQty: 0,
-    subTotal: 0,
     totalAmount: 0,
     deliveryCharge: 1000,
 };
@@ -46,18 +45,7 @@ export const reducers = {
         _state: UICart,
         action: PayloadAction<{ id: number }>
     ) {
-        // 削除する商品の数量と小計をリセット
-        _state.cartProducts.forEach((item) => {
-            if (item.id === action.payload.id) {
-                // カート合計数量 - 削除商品の数量
-                _state.totalQty -= item.quantity;
-                // カート小計 - 削除商品の小計
-                _state.subTotal -= item.totalPrice;
-                // カート合計金額 - 削除商品の小計
-                _state.totalAmount -= item.totalPrice;
-            }
-        });
-        // カート内商品リストを削除
+        //カート内商品リストを削除
         _state.cartProducts = _state.cartProducts.filter(
             (item) => item.id !== action.payload.id
         );
@@ -67,7 +55,6 @@ export const reducers = {
         ..._state,
         cartProducts: [],
         totalQty: 0,
-        subTotal: 0,
         totalAmount: 0,
     }),
     // 指定商品の数量のincrement
@@ -101,22 +88,14 @@ export const reducers = {
         _state.cartProducts = newCart;
     },
     getTotalResult(_state: UICart) {
-        // 商品の合計数を計算
-        const qtyArray = _state.cartProducts.map(
-            (item: UICartProduct) => item["quantity"]
+        _state.totalAmount = _state.cartProducts.reduce(
+            (cartTotal, cartItem) => {
+                return (cartTotal += cartItem.totalPrice);
+            },
+            0
         );
-        const totalQty = qtyArray.reduce((a, b) => a + b);
-        _state.totalQty = totalQty;
-
-        // 指定商品の小計を計算
-        const priceArray = _state.cartProducts.map(
-            (item: UICartProduct) => item["totalPrice"]
-        );
-        const subTotal = priceArray.reduce((a, b) => a + b);
-
-        // カート小計
-        _state.subTotal = subTotal;
-        // カート合計額
-        _state.totalAmount = subTotal + _state.deliveryCharge;
+        _state.totalQty = _state.cartProducts.reduce((cartQty, cartItem) => {
+            return (cartQty += cartItem.quantity);
+        }, 0);
     },
 };

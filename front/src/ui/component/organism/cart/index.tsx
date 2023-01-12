@@ -88,6 +88,9 @@ export const Cart: React.FC<any> = () => {
                                                                     }
                                                                 )
                                                             );
+                                                            dispatch(
+                                                                UICartAction.getTotalResult()
+                                                            );
                                                         }}
                                                     >
                                                         <span className="btn-square-icon">
@@ -184,7 +187,7 @@ export const Cart: React.FC<any> = () => {
                                             </span>
                                             <span className="fw-7">
                                                 {numberToPrice(
-                                                    cartState.subTotal
+                                                    cartState.totalAmount
                                                 )}
                                             </span>
                                         </li>
@@ -213,7 +216,8 @@ export const Cart: React.FC<any> = () => {
                                         <span className="fw-6">合計: </span>
                                         <span className="fw-6">
                                             {numberToPrice(
-                                                cartState.totalAmount
+                                                cartState.totalAmount +
+                                                    cartState.deliveryCharge
                                             )}
                                         </span>
                                     </div>
