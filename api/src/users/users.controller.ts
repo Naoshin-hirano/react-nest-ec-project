@@ -8,6 +8,7 @@ import { CredentialsDto } from './dto/credentials.dto';
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
+  // 新規登録
   @Post('signup')
   async singUp(
     @Body()
@@ -16,6 +17,7 @@ export class UsersController {
     return await this.usersService.singUp(createUserDto);
   }
 
+  // ログイン
   @Post('signin')
   async signIn(
     @Body()

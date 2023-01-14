@@ -1,6 +1,6 @@
 import { Exclude } from 'class-transformer';
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
-import { Products } from './products.entity';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+// import { Products } from './products.entity';
 
 @Entity()
 export class Users {
@@ -15,11 +15,13 @@ export class Users {
   password: string;
 
   @Column()
-  createdAt: string;
+  createdAt?: string;
 
   @Column()
-  updatedAt: string;
+  updatedAt?: string;
 
-  //   @ManyToOne(() => Products, (product) => product.categories)
-  //   product: Products;
+  accessToken: string;
+
+  //   @OneToMany(() => Products, (product) => product.user)
+  //   products?: Products[];
 }

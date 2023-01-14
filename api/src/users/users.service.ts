@@ -14,6 +14,7 @@ export class UsersService {
     private jwtService: JwtService,
   ) {}
 
+  // 新規登録
   async singUp(createUserDto: CreateUserDto): Promise<Users> {
     const { username, password } = createUserDto;
     const salt = await bcrypt.genSalt();
@@ -29,9 +30,8 @@ export class UsersService {
     return user;
   }
 
-  async signIn(
-    credentialsDto: CredentialsDto,
-  ): Promise<{ accessToken: string }> {
+  // ログイン
+  async signIn(credentialsDto: CredentialsDto): Promise<Users> {
     const { username, password } = credentialsDto;
     const user = await this.usersRepository.findOne({ username });
 
@@ -44,7 +44,12 @@ export class UsersService {
       };
       // id, password, usernameをtokenに変換して返す
       const accessToken = await this.jwtService.sign(payload);
-      return { accessToken };
+      return {
+        id: payload.id,
+        password: payload.password,
+        username: payload.username,
+        accessToken,
+      };
     }
     throw new UnauthorizedException(
       '入力したユーザー名またはパスワードが存在しません',
