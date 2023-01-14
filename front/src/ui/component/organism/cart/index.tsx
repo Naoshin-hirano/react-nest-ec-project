@@ -7,6 +7,7 @@ import { UICartProduct } from "core/store/ui/cart/type";
 import { dispatch } from "core/store";
 import { UICartAction } from "core/store/ui/cart/actions";
 import { numberToPrice } from "utils/helper";
+import * as Usecase from "../../../../core/usecase/cart";
 
 export const Cart: React.FC<any> = () => {
     const scroll = useRef<HTMLDivElement>(null);
@@ -20,18 +21,15 @@ export const Cart: React.FC<any> = () => {
     const cartState = useSelector(UICartSelector);
 
     const toggleItemQty = (id: number, type: string) => {
-        dispatch(
-            UICartAction.changeCartQty({
-                id: id,
-                type: type,
-            })
-        );
-        dispatch(UICartAction.getTotalResult());
+        // 指定商品の数量のincrement
+        Usecase.changeCartQty(cartState.cartProducts, id, type);
     };
 
     useEffect(() => {
         scrollToBottomOfList();
-    }, [scrollToBottomOfList]);
+        // カートの中身の変化に伴い合計金額と合計数量を再計算
+        Usecase.getTotalResult(cartState.cartProducts);
+    }, [scrollToBottomOfList, cartState.cartProducts]);
     return (
         <div className="cart-page">
             <div ref={scroll}></div>
@@ -80,16 +78,9 @@ export const Cart: React.FC<any> = () => {
                                                         type="button"
                                                         className="btn-square rmv-from-cart-btn"
                                                         onClick={() => {
-                                                            dispatch(
-                                                                UICartAction.removeProductFromCart(
-                                                                    {
-                                                                        id:
-                                                                            product.id,
-                                                                    }
-                                                                )
-                                                            );
-                                                            dispatch(
-                                                                UICartAction.getTotalResult()
+                                                            Usecase.removeProductFromCart(
+                                                                cartState.cartProducts,
+                                                                product.id
                                                             );
                                                         }}
                                                     >

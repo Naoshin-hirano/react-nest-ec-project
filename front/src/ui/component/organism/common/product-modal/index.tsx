@@ -1,16 +1,18 @@
 import { dispatch } from "core/store";
 import { UIModalAction } from "core/store/ui/product-modal/actions";
-import { UICartAction } from "core/store/ui/cart/actions";
 import { UIModalSelector } from "core/store/ui/product-modal/selector";
 import React, { useState } from "react";
 import { history } from "../../../../../route/history";
 import { useSelector } from "react-redux";
 import "./index.scss";
 import { numberToPrice } from "utils/helper";
+import * as Usecase from "../../../../../core/usecase/cart";
+import { UICartSelector } from "core/store/ui/cart/selector";
 
 export const ProductModal = () => {
     // このモーダルのグローバル状態管理
     const modalState = useSelector(UIModalSelector);
+    const cartState = useSelector(UICartSelector);
 
     // 数量の状態管理
     const [qty, setQty] = useState(1);
@@ -31,23 +33,19 @@ export const ProductModal = () => {
     };
 
     // どの商品をいくつカートへ追加するか
-    const addToCart = () => {
+    const addToCart = async () => {
         // モーダルを閉じる
         dispatch(UIModalAction.handleOpenModal(false));
         // カートへ指定商品を追加({商品データとqty})
-        dispatch(
-            UICartAction.addProductToCart({
-                id: modalState.productData.id,
-                title: modalState.productData.title,
-                description: modalState.productData.description,
-                price: modalState.productData.price,
-                image: modalState.productData.image,
-                quantity: qty,
-                totalPrice: modalState.productData.price * qty,
-            })
-        );
-        // 合計商品数を追加
-        dispatch(UICartAction.getTotalResult());
+        Usecase.addProductToCart(cartState.cartProducts, {
+            id: modalState.productData.id,
+            title: modalState.productData.title,
+            description: modalState.productData.description,
+            price: modalState.productData.price,
+            image: modalState.productData.image,
+            quantity: qty,
+            totalPrice: modalState.productData.price * qty,
+        });
         history.push("/cart");
     };
     return (
