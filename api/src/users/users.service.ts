@@ -14,14 +14,29 @@ export class UsersService {
     private jwtService: JwtService,
   ) {}
 
+  // ログインユーザー情報を取得
+  // todo: requestの型をRequestにするとcookiesでエラーが出るので要調査
+  async findByToken(request: any): Promise<Users> {
+    // 開発者ツールのネットワークタブの「cookies」タブから送信されたjwtを受け取る
+    const cookie = request.cookies['jwt'];
+    // jwtをユーザー情報にデコード
+    const user = await this.jwtService.verifyAsync(cookie);
+    // Usersオブジェクトで返却
+    const loginUser = await this.usersRepository.findOne({ id: user.id });
+    return loginUser;
+  }
+
   // 新規登録
   async singUp(createUserDto: CreateUserDto): Promise<Users> {
     const { username, password } = createUserDto;
     const salt = await bcrypt.genSalt();
     const hashpassword = await bcrypt.hash(password, salt);
+    const imageURL =
+      'https://res.cloudinary.com/dq8na8c7e/image/upload/v1673684134/react-nest-ec-project/98D3B03A-54B3-4976-818A-81F24F0BDD27_npq9oq.jpg';
     const user = this.usersRepository.create({
       username,
       password: hashpassword,
+      imageURL: imageURL,
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
     });
@@ -31,7 +46,7 @@ export class UsersService {
   }
 
   // ログイン
-  async signIn(credentialsDto: CredentialsDto): Promise<Users> {
+  async signIn(credentialsDto: CredentialsDto, response: any): Promise<any> {
     const { username, password } = credentialsDto;
     const user = await this.usersRepository.findOne({ username });
 
@@ -44,11 +59,14 @@ export class UsersService {
       };
       // id, password, usernameをtokenに変換して返す
       const accessToken = await this.jwtService.sign(payload);
+
+      response.cookie('jwt', accessToken, { httpOnly: true });
+
       return {
         id: payload.id,
         password: payload.password,
         username: payload.username,
-        accessToken,
+        imageURL: user.imageURL,
       };
     }
     throw new UnauthorizedException(

@@ -15,12 +15,13 @@ export class Users {
   password: string;
 
   @Column()
+  imageURL: string;
+
+  @Column()
   createdAt?: string;
 
   @Column()
   updatedAt?: string;
-
-  accessToken: string;
 
   //   @OneToMany(() => Products, (product) => product.user)
   //   products?: Products[];
