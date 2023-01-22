@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, Res, Req, Request } from '@nestjs/common';
+import { Body, Controller, Get, Post, Res, Req, Delete } from '@nestjs/common';
 import { Users } from 'src/typeorm/users.entity';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create.users.dto';
@@ -12,6 +12,12 @@ export class UsersController {
   @Get('profile')
   async findByToken(@Req() request: any): Promise<Users> {
     return await this.usersService.findByToken(request);
+  }
+
+  // ログアウト
+  @Post('signout')
+  async singOut(@Res({ passthrough: true }) response: any) {
+    return await this.usersService.signOut(response);
   }
 
   // 新規登録

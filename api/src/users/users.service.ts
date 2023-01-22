@@ -26,6 +26,15 @@ export class UsersService {
     return loginUser;
   }
 
+  // ログアウト
+  async signOut(response: any) {
+    // ブラウザのcookieを削除
+    response.clearCookie('jwt');
+    return {
+      message: true,
+    };
+  }
+
   // 新規登録
   async singUp(createUserDto: CreateUserDto): Promise<Users> {
     const { username, password } = createUserDto;
