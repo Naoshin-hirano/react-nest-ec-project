@@ -1,4 +1,5 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
+import { UIAuthSlice } from "./ui/auth/slice";
 import { UICartSlice } from "./ui/cart/slice";
 import { UICategorySlice } from "./ui/category/slice";
 import { UIModalSlice } from "./ui/product-modal/slice";
@@ -9,6 +10,7 @@ const appReducer = combineReducers({
     [UIModalSlice.name]: UIModalSlice.reducer,
     [UICartSlice.name]: UICartSlice.reducer,
     [UICategorySlice.name]: UICategorySlice.reducer,
+    [UIAuthSlice.name]: UIAuthSlice.reducer,
 });
 
 const store = configureStore({

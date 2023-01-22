@@ -1,4 +1,4 @@
-import { fetchCategoryList, fetchProductList } from "core/api/top";
+import { fetchCategoryList, fetchProductList } from "core/api/top/service";
 import { dispatch } from "core/store";
 import { UICategoryAction } from "core/store/ui/category/actions";
 import { UIProductAction } from "core/store/ui/products/actions";

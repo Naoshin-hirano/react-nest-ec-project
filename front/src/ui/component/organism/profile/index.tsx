@@ -1,10 +1,12 @@
 import React from "react";
 import { history } from "../../../../route/history";
 import { FavoriteList } from "./FavoriteList";
+import * as Usecase from "../../../../core/usecase/login";
 import "./index.scss";
 
 export const Profile: React.FC<any> = () => {
-    const logout = () => {
+    const logout = async () => {
+        await Usecase.sendLogout();
         history.push("/login");
     };
     return (
