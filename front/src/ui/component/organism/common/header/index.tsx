@@ -31,16 +31,24 @@ export const Header = () => {
 
                         <div className="navbar-btns">
                             {authState.authState.status && (
-                                <Link
-                                    to={`/profile/${authState.authState.id}`}
-                                    className="add-to-cart-btn flex"
-                                >
-                                    <img
-                                        src={authState.authState.imageName}
-                                        alt="Avatar"
-                                        className="btn-avatar"
-                                    ></img>
-                                </Link>
+                                <>
+                                    <Link
+                                        to={`/profile/${authState.authState.id}`}
+                                        className="add-to-cart-btn flex"
+                                    >
+                                        <img
+                                            src={authState.authState.imageName}
+                                            alt="Avatar"
+                                            className="btn-avatar"
+                                        ></img>
+                                    </Link>
+                                    <Link
+                                        to="/product/exhibit"
+                                        className="add-to-cart-btn flex"
+                                    >
+                                        <i className="fa-solid fa-square-plus"></i>
+                                    </Link>
+                                </>
                             )}
                             <Link
                                 to="/product/cart/"

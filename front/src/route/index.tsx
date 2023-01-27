@@ -4,7 +4,7 @@ import { authRoute } from "route/authRoute";
 import React from "react";
 import { TopPage } from "ui/page/top";
 import { profileRoute } from "./profileRoute";
-import { cartRoute } from "./cartRoute";
+import { productRoute } from "./productRoute";
 import { categoryRoute } from "./categoryRoute";
 
 const indexRoute: Route[] = [
@@ -21,7 +21,7 @@ const indexRoute: Route[] = [
 export const routes: Route[] = [
     authRoute,
     profileRoute,
-    cartRoute,
+    productRoute,
     categoryRoute,
 ].reduce((prevRoute, currRoute) => prevRoute.concat(currRoute), indexRoute);
 
