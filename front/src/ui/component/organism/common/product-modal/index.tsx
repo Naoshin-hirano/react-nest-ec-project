@@ -46,7 +46,7 @@ export const ProductModal = () => {
             quantity: qty,
             totalPrice: modalState.productData.price * qty,
         });
-        history.push("/cart");
+        history.push("/product/cart");
     };
     return (
         <div className="overlay-bg">

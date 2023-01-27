@@ -15,27 +15,22 @@ export const Header = () => {
 
     return (
         <nav className="navbar">
-            {authState.authState.status && (
-                <div className="navbar-content">
-                    <div className="container">
-                        <div className="navbar-top flex flex-between">
-                            <Link to="/" className="navbar-brand">
-                                <span className="text-regal-blue">
-                                    ECゴルフ
-                                </span>
-                            </Link>
+            <div className="navbar-content">
+                <div className="container">
+                    <div className="navbar-top flex flex-between">
+                        <Link to="/" className="navbar-brand">
+                            <span className="text-regal-blue">ECゴルフ</span>
+                        </Link>
 
-                            <form className="navbar-search flex">
-                                <input type="text" placeholder="検索 ..." />
-                                <button
-                                    type="submit"
-                                    className="navbar-search-btn"
-                                >
-                                    <i className="fas fa-search"></i>
-                                </button>
-                            </form>
+                        <form className="navbar-search flex">
+                            <input type="text" placeholder="検索 ..." />
+                            <button type="submit" className="navbar-search-btn">
+                                <i className="fas fa-search"></i>
+                            </button>
+                        </form>
 
-                            <div className="navbar-btns">
+                        <div className="navbar-btns">
+                            {authState.authState.status && (
                                 <Link
                                     to={`/profile/${authState.authState.id}`}
                                     className="add-to-cart-btn flex"
@@ -46,65 +41,65 @@ export const Header = () => {
                                         className="btn-avatar"
                                     ></img>
                                 </Link>
-                                <Link
-                                    to="/cart"
-                                    className="add-to-cart-btn flex"
-                                >
-                                    <span className="btn-ico">
-                                        <i className="fas fa-shopping-cart"></i>
+                            )}
+                            <Link
+                                to="/product/cart/"
+                                className="add-to-cart-btn flex"
+                            >
+                                <span className="btn-ico">
+                                    <i className="fas fa-shopping-cart"></i>
+                                </span>
+                                <div className="btn-txt fw-5">
+                                    <span className="cart-count-value">
+                                        {cartState.totalQty}
                                     </span>
-                                    <div className="btn-txt fw-5">
-                                        <span className="cart-count-value">
-                                            {cartState.totalQty}
-                                        </span>
-                                    </div>
-                                </Link>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="navbar-bottom bg-regal-blue">
-                        <div className="container flex flex-between">
-                            <ul
-                                className={`nav-links flex ${
-                                    isSidebarOpen ? "show-nav-links" : ""
-                                }`}
-                            >
-                                <button
-                                    type="button"
-                                    className="navbar-hide-btn text-white"
-                                    onClick={() => setIsSidebarOpen(false)}
-                                >
-                                    <i className="fas fa-times"></i>
-                                </button>
-                                {categoryState.categoryList.map(
-                                    (category: UICategory) => (
-                                        <li key={category.id}>
-                                            <Link
-                                                to={`/category/${category.id}`}
-                                                className="nav-link text-white"
-                                                onClick={() =>
-                                                    setIsSidebarOpen(false)
-                                                }
-                                            >
-                                                {category.name}
-                                            </Link>
-                                        </li>
-                                    )
-                                )}
-                            </ul>
-
-                            <button
-                                type="button"
-                                className="navbar-show-btn text-gold"
-                                onClick={() => setIsSidebarOpen(true)}
-                            >
-                                <i className="fas fa-bars"></i>
-                            </button>
+                                </div>
+                            </Link>
                         </div>
                     </div>
                 </div>
-            )}
+
+                <div className="navbar-bottom bg-regal-blue">
+                    <div className="container flex flex-between">
+                        <ul
+                            className={`nav-links flex ${
+                                isSidebarOpen ? "show-nav-links" : ""
+                            }`}
+                        >
+                            <button
+                                type="button"
+                                className="navbar-hide-btn text-white"
+                                onClick={() => setIsSidebarOpen(false)}
+                            >
+                                <i className="fas fa-times"></i>
+                            </button>
+                            {categoryState.categoryList.map(
+                                (category: UICategory) => (
+                                    <li key={category.id}>
+                                        <Link
+                                            to={`/category/${category.id}`}
+                                            className="nav-link text-white"
+                                            onClick={() =>
+                                                setIsSidebarOpen(false)
+                                            }
+                                        >
+                                            {category.name}
+                                        </Link>
+                                    </li>
+                                )
+                            )}
+                        </ul>
+
+                        <button
+                            type="button"
+                            className="navbar-show-btn text-gold"
+                            onClick={() => setIsSidebarOpen(true)}
+                        >
+                            <i className="fas fa-bars"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
         </nav>
     );
 };
