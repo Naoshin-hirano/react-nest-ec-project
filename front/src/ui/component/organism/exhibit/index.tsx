@@ -5,7 +5,7 @@ import "./index.scss";
 import { ImageSrc } from "./ImageSrc";
 
 export interface SUBMIT_DATA {
-    productname: string;
+    title: string;
     description: string;
     category: string;
     price: string;
@@ -26,7 +26,7 @@ export const ExhibitItem: React.FC<any> = () => {
 
     // fieldの初期値
     const initialValues = {
-        productname: "",
+        title: "",
         description: "",
         category: "",
         price: "",
@@ -46,7 +46,7 @@ export const ExhibitItem: React.FC<any> = () => {
 
     // バリデーション管理
     const validationSchema = Yup.object().shape({
-        productname: Yup.string().required("商品名を入力してください"),
+        title: Yup.string().required("商品名を入力してください"),
         description: Yup.string().required("商品説明をを入力してください"),
         category: Yup.string().required("カテゴリーを選んください"),
         price: Yup.string().required("金額を入力してください"),
@@ -125,18 +125,16 @@ export const ExhibitItem: React.FC<any> = () => {
                                         </div>
                                     </div>
                                     <div className="form-group">
-                                        <label htmlFor="productname">
-                                            商品名*
-                                        </label>
+                                        <label htmlFor="title">商品名*</label>
                                         <ErrorMessage
-                                            name="productname"
+                                            name="title"
                                             component="span"
                                             className="errors"
                                         />
                                         <Field
                                             type="text"
                                             required
-                                            name="productname"
+                                            name="title"
                                         />
                                     </div>
                                     <div className="form-group">

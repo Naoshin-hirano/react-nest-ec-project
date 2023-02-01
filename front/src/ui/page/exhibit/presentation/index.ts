@@ -1,13 +1,20 @@
-export const useCreateProps = () => {
-    return {
-        firstTitle,
-    };
-};
-
-type FirstTitle = {
+export type SUBMIT_DATA = {
     title: string;
+    description: string;
+    category: string;
+    price: string;
+    // file: any;
 };
 
-const firstTitle: FirstTitle = {
-    title: "Firstタイトル",
+export const useCreateProps = () => {
+    const registerProductInfo: SUBMIT_DATA = {
+        title: "",
+        description: "",
+        category: "選択してください",
+        price: "",
+        // file: null,
+    };
+    return {
+        registerProductInfo,
+    };
 };
