@@ -3,7 +3,7 @@ export type SUBMIT_DATA = {
     description: string;
     category: string;
     price: string;
-    // file: any;
+    file: any;
 };
 
 export const useCreateProps = () => {
@@ -12,7 +12,7 @@ export const useCreateProps = () => {
         description: "",
         category: "選択してください",
         price: "",
-        // file: null,
+        file: "",
     };
     return {
         registerProductInfo,
