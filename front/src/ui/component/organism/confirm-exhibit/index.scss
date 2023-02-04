@@ -43,7 +43,7 @@
                 label {
                     font-size: 20px;
                 }
-                input {
+                p {
                     margin-top: 6px;
                     min-width: 18em;
                     height: 37px;
@@ -55,20 +55,19 @@
                     border-radius: 4px;
                     margin-bottom: 31px;
                     transition: all 250ms ease-in-out;
-                    &:hover {
-                        background-color: #ffffff;
-                        box-shadow: 0px 0px 14px 0.3px #0e81ce96;
-                    }
-
-                    &:focus {
-                        outline: none;
-                        box-shadow: 0px 0px 12px 0.8px #3474dbb2;
-                    }
                 }
-                textarea {
+                img {
                     margin-top: 6px;
                     min-width: 18em;
-                    height: 100px;
+                    max-width: 18em;
+                    height: auto;
+                    padding: 0px 10px;
+                    margin-bottom: 31px;
+                }
+                .product-description {
+                    margin-top: 6px;
+                    max-width: 18em;
+                    height: auto;
                     padding: 0px 10px;
                     font-size: 16px;
                     font-family: "Open Sans", sans-serif;
@@ -76,42 +75,7 @@
                     border: 0;
                     border-radius: 4px;
                     margin-bottom: 31px;
-                    transition: all 250ms ease-in-out;
-                    &:hover {
-                        background-color: #ffffff;
-                        box-shadow: 0px 0px 14px 0.3px #0e81ce96;
-                    }
-
-                    &:focus {
-                        outline: none;
-                        box-shadow: 0px 0px 12px 0.8px #3474dbb2;
-                    }
                 }
-                select {
-                    margin-top: 6px;
-                    min-width: 18em;
-                    height: 37px;
-                    padding: 0px 10px;
-                    font-size: 16px;
-                    font-family: "Open Sans", sans-serif;
-                    background-color: #f3f3f3;
-                    border: 0;
-                    border-radius: 4px;
-                    margin-bottom: 31px;
-                    transition: all 250ms ease-in-out;
-                    &:hover {
-                        background-color: #ffffff;
-                        box-shadow: 0px 0px 14px 0.3px #0e81ce96;
-                    }
-
-                    &:focus {
-                        outline: none;
-                        box-shadow: 0px 0px 12px 0.8px #3474dbb2;
-                    }
-                }
-            }
-            .errors {
-                color: red;
             }
         }
     }
@@ -119,12 +83,12 @@
     .footer {
         display: inline-block;
         margin-top: 3em;
-        min-width: 18em;
     }
     .btn {
         font-size: 21px;
         width: 100%;
         padding: 5px 20px;
+        margin-bottom: 20px;
         border: 0;
         background-color: #3498db;
         color: #fff;

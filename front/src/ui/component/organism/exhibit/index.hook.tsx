@@ -2,6 +2,7 @@ import React, { useRef, useState } from "react";
 import { Controller, useFormContext } from "react-hook-form";
 import "./index.scss";
 import { ImageSrc } from "./ImageSrc";
+import { history } from "../../../../route/history";
 
 export const formTextDefault = (props: any): any => {
     const { registerProductInfo } = props;
@@ -62,6 +63,7 @@ export const ExhibitHookItem: React.FC<any> = (props: any) => {
     // 商品登録
     const onSubmit: any = (data: any) => {
         console.log("クリック", data);
+        history.push("/product/confirm");
     };
     return (
         <div className="base-container">
